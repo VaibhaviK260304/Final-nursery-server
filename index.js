@@ -38,3 +38,54 @@ const plants = [{
         "description": "Lilies are a genus of flowering plants which includes around 100 species."
     }
 ]
+app.post("/plant", (req, res)=>{
+    const {name, category, image, price, description} = req.body
+
+    if(!name){
+        return res.json({
+            success: false,
+            data: null,
+            message: "Please enter a name for the plant."
+        })
+    }    
+    if(!category){
+        return res.json({
+            success: false,
+            data: null,
+            message: "Please enter a category of the plant."
+        })
+    }    
+    if(!image){
+        return res.json({
+            success: false,
+            data: null,
+            message: "Please the image of the plant."
+        })
+    }    
+    if(!price){
+        return res.json({
+            success: false,
+            data: null,
+            message: "Please enter price for the plant."
+        })
+    }    
+    if(!description){
+        return res.json({
+            success: false,
+            data: null,
+            message: "Description can not be empty."
+        })
+    }
+
+    const randomId = Math.round(Math.random() * 1000)
+
+    const newPlant = { id: randomId, name: name, category:category, image: image, price: price, description: description}
+
+    plants.push(newPlant)
+
+    res.json({
+        success: true,
+        data: newPlant,
+        message: "New plant added!!!"
+    })
+})
