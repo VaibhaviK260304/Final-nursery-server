@@ -109,3 +109,43 @@ app.get("/plant/:id", (req, res)=>{
         message: plant ? "plant fetched successfully" : "plant not found"
     })
 })
+
+app.put("/plant/:id",(req, res)=>{
+    const {name, category, image, price, description} = req.body
+
+    const {id} = req.params
+
+    let index = -1
+    plants.forEach((plant, i)=>{
+        if(plant.id == id){
+            index = i
+        }
+    })
+
+    const newObj = {
+        id,                            //when the key and value are same we can write the name only once.
+        name,
+        category,
+        image,
+        price,
+        description
+    }
+
+    if(index==-1){
+        return res.json({
+            success: false,
+            data: null,
+            message: `plant not found for id ${id}`
+        })
+    }
+    else{
+        plants[index] = newObj
+
+        return res.json({
+            success: true,
+            data: newObj,
+            message: `plant updated successfully`
+        })
+    }
+
+})
