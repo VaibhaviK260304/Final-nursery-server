@@ -89,3 +89,23 @@ app.post("/plant", (req, res)=>{
         message: "New plant added!!!"
     })
 })
+
+app.get("/plants",(req, res)=>{
+    res.json({
+        success: true,
+        data: plants,
+        message: "plants fetched successfully"
+    })
+})
+
+app.get("/plant/:id", (req, res)=>{
+    const {id} = req.params
+
+    const plant = plants.find((p)=>p.id == id)
+
+    res.json({
+        success: plant ? true : false,
+        data: plant || null,
+        message: plant ? "plant fetched successfully" : "plant not found"
+    })
+})
