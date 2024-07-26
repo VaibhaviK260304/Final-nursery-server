@@ -38,6 +38,15 @@ const plants = [{
         "description": "Lilies are a genus of flowering plants which includes around 100 species."
     }
 ]
+
+app.get("/", (req, res)=>{
+    res.json({
+        success: true,
+        data: [],
+        message: "server is healthy"
+    })
+} )
+
 app.post("/plant", (req, res)=>{
     const {name, category, image, price, description} = req.body
 
@@ -185,7 +194,7 @@ app.use("*",(req, res)=>{
     </div>`)
 })
 
-const port = process.env.port
+const port = process.env.port || 5000
 app.listen(port,()=>{
-    console.log(`server is running on port ${port}`)
+    console.log(`server is running on port http://localhost:${port}`)
 })
