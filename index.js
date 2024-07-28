@@ -2,6 +2,7 @@
 import express from "express"
 import dotenv from "dotenv"
 dotenv.config()
+import mongoose from "mongoose"
 
 //import we made.
 import { getHealth } from "./controllers/health.js"
@@ -10,6 +11,20 @@ import {error} from "./controllers/error.js"
 
 const app = express()
 app.use(express.json())
+
+//connecting server with database and using IIFE
+const dbConnection = async() => {
+    const connection = await mongoose.connect(process.env.MONGO_URL)
+
+    if(connection){
+        console.log(`Connected to MongoDB`)
+    }
+    else{
+        console.log(`MongoDB not connected`)
+    }
+}
+dbConnection();
+
 
 app.get("/health", getHealth)
 
