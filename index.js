@@ -11,17 +11,8 @@ import {postPlant, getPlants, getPlantId, putPlantId, deletePlantId} from "./con
 import {error} from "./controllers/error.js"
 
 
-const express = require('express');
-const cors = require('cors');
 const app = express();
-
-app.use(cors({
-  origin: 'https://your-frontend-domain.com', // Replace with your frontend domain
-  credentials: true
-}));
-
-app.options('*', cors()); // Enable pre-flight requests for all routes
-
+app.use(cors())
 app.use(express.json())
 
 //connecting server with database
