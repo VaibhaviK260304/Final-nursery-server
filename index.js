@@ -10,8 +10,18 @@ import {getHealth} from "./controllers/health.js"
 import {postPlant, getPlants, getPlantId, putPlantId, deletePlantId} from "./controllers/plant.js"
 import {error} from "./controllers/error.js"
 
-const app = express()
-app.use(cors())
+
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+app.use(cors({
+  origin: 'https://your-frontend-domain.com', // Replace with your frontend domain
+  credentials: true
+}));
+
+app.options('*', cors()); // Enable pre-flight requests for all routes
+
 app.use(express.json())
 
 //connecting server with database
