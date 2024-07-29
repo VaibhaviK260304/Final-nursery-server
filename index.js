@@ -3,6 +3,7 @@ import express from "express"
 import dotenv from "dotenv"
 dotenv.config()
 import mongoose from "mongoose"
+import cors from "cors"
 
 //import we made.
 import {getHealth} from "./controllers/health.js"
@@ -10,9 +11,10 @@ import {postPlant, getPlants, getPlantId, putPlantId, deletePlantId} from "./con
 import {error} from "./controllers/error.js"
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 
-//connecting server with database and using IIFE
+//connecting server with database
 const dbConnection = async() => {
     const connection = await mongoose.connect(process.env.MONGO_URL)
 
