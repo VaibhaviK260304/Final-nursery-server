@@ -5,7 +5,7 @@ dotenv.config()
 import mongoose from "mongoose"
 
 //import we made.
-import { getHealth } from "./controllers/health.js"
+import {getHealth} from "./controllers/health.js"
 import {postPlant, getPlants, getPlantId, putPlantId, deletePlantId} from "./controllers/plant.js"
 import {error} from "./controllers/error.js"
 
@@ -24,8 +24,7 @@ const dbConnection = async() => {
     }
 }
 dbConnection();
-
-
+    
 app.get("/health", getHealth)
 
 app.get("/", (req, res)=>{
@@ -34,7 +33,7 @@ app.get("/", (req, res)=>{
         data: [],
         message: "server is healthy"
     })
-} )
+})
 
 app.post("/plant", postPlant)
 app.get("/plants", getPlants)
