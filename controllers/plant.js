@@ -1,4 +1,4 @@
-import Plant from "./../models/Plant"
+import Plant from "./../models/Plant.js"
 
 const postPlant = async (req, res)=>{
     const {name, category, image, price, description} = req.body
@@ -45,6 +45,7 @@ const postPlant = async (req, res)=>{
 
     // plants.push(newPlant)
 
+    try{
     const newPlant = new Plant({
         name: name,
         category: category,
@@ -60,7 +61,15 @@ const postPlant = async (req, res)=>{
         data: savedPlant,
         message: "New plant added!!!"
     })
+}catch (err){
+    return res.status(500).json({
+        success: false,
+        data: null,
+        message: "Error adding new plant",
+    })
 }
+}
+
 
 const getPlants = async (req, res)=>{
 
