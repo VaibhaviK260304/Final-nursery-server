@@ -45,7 +45,6 @@ const postPlant = async (req, res)=>{
 
     // plants.push(newPlant)
 
-    try{
     const newPlant = new Plant({
         name: name,
         category: category,
@@ -61,19 +60,18 @@ const postPlant = async (req, res)=>{
         data: savedPlant,
         message: "New plant added!!!"
     })
-}catch (err){
     return res.status(500).json({
         success: false,
         data: null,
         message: "Error adding new plant",
     })
 }
-}
+
 
 
 const getPlants = async (req, res)=>{
 
-    const allPlants = await Plant.find()
+    const allPlants = await Plant.find().sort({updatedAt: -1})
 
     res.json({
         success: true,
